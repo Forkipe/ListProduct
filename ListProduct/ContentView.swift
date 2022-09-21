@@ -22,17 +22,22 @@ struct ContentView: View {
                            List {
                                ForEach(listItems, id: \.self) { item in
                                    Text(item.name).listRowBackground(Color(item.color))
-                               }
+                               }.onDelete(perform: delete)
                            }
                                .navigationBarTitle(Text("Products"))
-                              
                                .navigationBarItems(trailing:
                                    Button(action: {
                                        self.addItem.toggle()
                                    }, label: {
                                        Image(systemName: "plus")
                                    })
-
+                           )
+                               .navigationBarItems(trailing:
+                                                    Button(action: {
+                                   
+                                   }, label: {
+                                      Image(systemName: "minus")
+                                   })
                            )
                        }.sheet(isPresented: $addItem) {
                            VStack {
@@ -43,8 +48,6 @@ struct ContentView: View {
                                Picker(selection: self.$colorSelection, label: Text("Select a Color")) {
                                    Text("Red").tag(UIColor.systemRed)
                                    Text("Blue").tag(UIColor.systemBlue)
-                                   Text("Green").tag(UIColor.systemGreen)
-                                   Text("Yellow").tag(UIColor.systemYellow)
                                    Text("Brown").tag(UIColor.systemBrown)
                                }
                                Spacer()
@@ -73,6 +76,9 @@ struct ContentView: View {
 
                }
            }
+       }
+    func delete(at offsets: IndexSet) {
+        listItems.remove(atOffsets: offsets)
        }
     }
 
