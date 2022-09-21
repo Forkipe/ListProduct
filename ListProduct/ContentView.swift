@@ -32,13 +32,7 @@ struct ContentView: View {
                                        Image(systemName: "plus")
                                    })
                            )
-                               .navigationBarItems(trailing:
-                                                    Button(action: {
-                                   
-                                   }, label: {
-                                      Image(systemName: "minus")
-                                   })
-                           )
+                             
                        }.sheet(isPresented: $addItem) {
                            VStack {
                                HStack {
